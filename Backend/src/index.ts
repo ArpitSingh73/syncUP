@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import session from "cookie-session";
 import { config } from "./config/app.config";
- import connectDatabase  from "./config/database.config";
+import connectDatabase from "./config/database.config";
 import { asyncHandler } from "./middlewares/asyncHandler.middleware";
 import { BadRequestException } from "./utils/appError";
 import { ErrorCodeEnum } from "./enums/error-code.enum";
@@ -25,7 +25,6 @@ app.use(
   })
 );
 
-
 app.use(
   cors({
     origin: config.FRONTEND_ORIGIN,
@@ -34,7 +33,8 @@ app.use(
 );
 
 app.get(
-    `/`,   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  `/`,
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     throw new BadRequestException(
       "This is a bad request",
       ErrorCodeEnum.AUTH_INVALID_TOKEN
@@ -44,7 +44,6 @@ app.get(
     });
   })
 );
-
 
 app.listen(config.PORT, async () => {
   console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`);
